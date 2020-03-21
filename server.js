@@ -11,16 +11,12 @@ mongoose.connect('mongodb://localhost:27017/products',
   } console.log('Conectado ao DataBase');
 });
 
-const product = mongoose.model('Product');
-
-app.use('/', (req,res) => {
-    product.create({name:"Kayo",old:23});
-    res.send('Servidor Funcionando');
-})
+app.use('/api', require('./src/routes'));
 
 const port= 3001;
 app.listen(port,(err) => {
-  if(err){
+    console.clear();
+    if(err){
       return console.log(err);
   }else{console.log(`Conectado em https://localhost:${port}`)};
 });
